@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<!-- saved from url=(0086)https://www.kaggle.com/code/ravivarmaodugu/salary-classification-eda-modeling/notebook -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  
+    
+  
+  
+    
+  
+  <script type="text/javascript" async="" src="./Salary Classification _EDA _Modeling _ Kaggle_files/js" nonce=""></script><script type="text/javascript" async="" src="./Salary Classification _EDA _Modeling _ Kaggle_files/js(1)" nonce=""></script><script type="text/javascript" async="" src="./Salary Classification _EDA _Modeling _ Kaggle_files/analytics.js.download" nonce=""></script><script src="./Salary Classification _EDA _Modeling _ Kaggle_files/cb=gapi.loaded_0" nonce="" async=""></script><script nonce="" type="text/javascript">
+    window["pageRequestStartTime"] = 1681935395931;
+    window["pageRequestEndTime"] = 1681935395945;
+    window["initialPageLoadStartTime"] = new Date().getTime();
+  </script>
+  <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin="anonymous"><link rel="preconnect" href="https://stats.g.doubleclick.net/"><link rel="preconnect" href="https://storage.googleapis.com/"><link rel="preconnect" href="https://apis.google.com/">
+  <link href="https://www.kaggle.com/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <link rel="manifest" href="https://www.kaggle.com/static/json/manifest.json" crossorigin="use-credentials">
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Salary Classification _EDA _Modeling _ Kaggle_files/icon" rel="preload" as="style">
+  <link href="./Salary Classification _EDA _Modeling _ Kaggle_files/css" rel="preload" as="style">
+  <link href="./Salary Classification _EDA _Modeling _ Kaggle_files/icon" rel="stylesheet" media="all" id="async-google-font-1">
+  <link href="./Salary Classification _EDA _Modeling _ Kaggle_files/css" rel="stylesheet" media="all" id="async-google-font-2">
+  <script nonce="" type="text/javascript">
+    const styleSheetIds = ["async-google-font-1", "async-google-font-2"];
+    styleSheetIds.forEach(function (id) {
+      document.getElementById(id).addEventListener("load", function() {
+        this.media = "all";
+      });
+    });
+  </script>
+
+    <link rel="canonical" href="https://www.kaggle.com/discussion">
+    <link rel="stylesheet" type="text/css" href="./Salary Classification _EDA _Modeling _ Kaggle_files/vendor.css">
+    <link rel="stylesheet" type="text/css" href="./Salary Classification _EDA _Modeling _ Kaggle_files/app.css">
+  
+    
+ 
+      <script nonce="">
+        try{(function(a,s,y,n,c,h,i,d,e){d=s.createElement("style");
+        d.appendChild(s.createTextNode(""));s.head.appendChild(d);d=d.sheet;
+        y=y.map(x => d.insertRule(x + "{ opacity: 0 !important }"));
+        h.start=1*new Date;h.end=i=function(){y.forEach(x => x<d.cssRules.length ? d.deleteRule(x) : {})};
+        (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+        })(window,document,['.site-header-react__nav'],'dataLayer',2000,{'GTM-52LNT9S':true});}catch(ex){}
+    </script><style></style>
+    <script nonce="">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-12629138-1', {
+            'optimize_id': 'GTM-52LNT9S',
+            'displayFeaturesTask': null,
+            'send_page_view': false,
+            'content_group1': 'Forums'
+        });
+        gtag('config', 'G-T7QHS60L4Q', {
+            'optimize_id': 'GTM-52LNT9S',
+            'displayFeaturesTask': null,
+            'send_page_view': false,
+            'content_group1': 'Forums'
+        });
+    </script>
+    <script nonce="" async="" src="./Salary Classification _EDA _Modeling _ Kaggle_files/js(2)"></script>
+
+  
+    
+    
+    
+    
+    
+
+
+   
+  
+    
+
+  
+    
+
+  
+    
+
+
+    <script nonce="">window['useKaggleAnalytics'] = true;</script>
+
+  <script id="gapi-target" nonce="" src="./Salary Classification _EDA _Modeling _ Kaggle_files/api.js.download" defer="" async="" gapi_processed="true"></script>
+  <script nonce="" src="./Salary Classification _EDA _Modeling _ Kaggle_files/runtime.js.download" data-turbolinks-track="reload"></script>
+  <script nonce="" src="./Salary Classification _EDA _Modeling _ Kaggle_files/vendor.js.download" data-turbolinks-track="reload"></script>
+  <script nonce="" src="./Salary Classification _EDA _Modeling _ Kaggle_files/app.js.download" data-turbolinks-track="reload"></script>
+    <script nonce="" type="text/javascript">
+      window.kaggleStackdriverConfig = {
+        key: 'AIzaSyA4eNqUdRRskJsCZWVz-qL655Xa5JEMreE',
+        projectId: 'kaggle-161607',
+        service: 'web-fe',
+        version: 'ci',
+        userId: '0'
+      }
+    </script>
+<script type="text/javascript" src="./Salary Classification _EDA _Modeling _ Kaggle_files/MathJax.js.download"></script><style data-styled="active" data-styled-version="5.3.9"></style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888; display: contents}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > *, .MJXp-munder > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><link href="./Salary Classification _EDA _Modeling _ Kaggle_files/icon" rel="stylesheet" media="print" id="async-google-font-1"><link href="./Salary Classification _EDA _Modeling _ Kaggle_files/css" rel="stylesheet" media="print" id="async-google-font-2"><link rel="canonical" href="https://www.kaggle.com/learn"><link rel="canonical" href="https://www.kaggle.com/datasets/anas123siddiqui/watches-of-all-ranges"><link rel="stylesheet" type="text/css" href="./Salary Classification _EDA _Modeling _ Kaggle_files/5462.075435bb3f65c01b9cf9.css"><script src="./Salary Classification _EDA _Modeling _ Kaggle_files/loader.js.download" data-loaded="1"></script><script type="text/javascript" charset="UTF-8" nonce="" src="./Salary Classification _EDA _Modeling _ Kaggle_files/loader.js(1).download"></script><link id="load-css-0" rel="stylesheet" type="text/css" href="./Salary Classification _EDA _Modeling _ Kaggle_files/tooltip.css"><link id="load-css-1" rel="stylesheet" type="text/css" href="./Salary Classification _EDA _Modeling _ Kaggle_files/util.css"><link id="load-css-2" rel="stylesheet" type="text/css" href="./Salary Classification _EDA _Modeling _ Kaggle_files/controls.css"><script type="text/javascript" charset="UTF-8" src="./Salary Classification _EDA _Modeling _ Kaggle_files/jsapi_compiled_default_module.js.download" nonce=""></script><script type="text/javascript" charset="UTF-8" src="./Salary Classification _EDA _Modeling _ Kaggle_files/jsapi_compiled_graphics_module.js.download" nonce=""></script><script type="text/javascript" charset="UTF-8" src="./Salary Classification _EDA _Modeling _ Kaggle_files/jsapi_compiled_ui_module.js.download" nonce=""></script><script type="text/javascript" charset="UTF-8" src="./Salary Classification _EDA _Modeling _ Kaggle_files/jsapi_compiled_corechart_module.js.download" nonce=""></script><script type="text/javascript" charset="UTF-8" src="./Salary Classification _EDA _Modeling _ Kaggle_files/jsapi_compiled_controls_module.js.download" nonce=""></script><link rel="canonical" href="https://www.kaggle.com/code/amanpathak2909/watch-price-prediction"><link rel="alternate" type="application/json+oembed" href="https://www.kaggle.com/oembed/kernel?url=https%3A%2F%2Fwww.kaggle.com%2Fcode%2Famanpathak2909%2Fwatch-price-prediction%3FscriptVersionId%3D123632782" title="Watch_Price_Prediction"><link rel="stylesheet" type="text/css" href="./Salary Classification _EDA _Modeling _ Kaggle_files/kernelViewerMaterialContainer.56ec1322d855ad0f5482.css"><link rel="stylesheet" type="text/css" href="./Salary Classification _EDA _Modeling _ Kaggle_files/loggedOutHomePage2019.492f0b9418dbf342e523.css"><link rel="canonical" href="https://www.kaggle.com/notebooks"><link rel="canonical" href="https://www.kaggle.com/code/thabresh/eda-students-exam-scores"><link rel="alternate" type="application/json+oembed" href="https://www.kaggle.com/oembed/kernel?url=https%3A%2F%2Fwww.kaggle.com%2Fcode%2Fthabresh%2Feda-students-exam-scores%3FscriptVersionId%3D126390498" title="EDA - Students Exam Scores"><link rel="canonical" href="https://www.kaggle.com/code/eyadgk/covid-19-ppe-eda-od-using-efficentnet"><link rel="alternate" type="application/json+oembed" href="https://www.kaggle.com/oembed/kernel?url=https%3A%2F%2Fwww.kaggle.com%2Fcode%2Feyadgk%2Fcovid-19-ppe-eda-od-using-efficentnet%3FscriptVersionId%3D126363636" title="COVID 19 PPE | EDA + OD using efficentnet"><link rel="canonical" href="https://www.kaggle.com/code/weddou/uk-traffic-data-patterns-throught-space-time"><link rel="alternate" type="application/json+oembed" href="https://www.kaggle.com/oembed/kernel?url=https%3A%2F%2Fwww.kaggle.com%2Fcode%2Fweddou%2Fuk-traffic-data-patterns-throught-space-time%3FscriptVersionId%3D123966183" title="UK Traffic Data : Patterns Throught Space &amp; Time"><title>Salary Classification |EDA |Modeling | Kaggle</title><meta name="robots" content="index, follow"><meta name="description" content="Explore and run machine learning code with Kaggle Notebooks | Using data from Salary Prediction Classification"><meta name="turbolinks-cache-control" content="no-cache"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"><meta name="theme-color" content="#008ABC"><meta name="og:url" content="https://kaggle.com/code/ravivarmaodugu/salary-classification-eda-modeling"><meta property="og:title" content="Salary Classification |EDA |Modeling"><meta property="og:description" content="Explore and run machine learning code with Kaggle Notebooks | Using data from Salary Prediction Classification"><meta property="og:type" content="website"><meta name="og:image" content="https://storage.googleapis.com/kaggle-avatars/thumbnails/7944721-kg.jpg"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@kaggledatasets"><meta name="twitter:site" content="@Kaggle"><link rel="canonical" href="https://www.kaggle.com/code/ravivarmaodugu/salary-classification-eda-modeling"><link rel="alternate" type="application/json+oembed" href="https://www.kaggle.com/oembed/kernel?url=https%3A%2F%2Fwww.kaggle.com%2Fcode%2Fravivarmaodugu%2Fsalary-classification-eda-modeling%3FscriptVersionId%3D126438980" title="Salary Classification |EDA |Modeling"></head>
+
+<body data-turbolinks="false"><div id="MathJax_Message" style="display: none;"></div>
+  <main>
+    
+
+
+
+
+
+<div id="site-container"><div class="" style="height: inherit; --mdc-theme-on-primary:#FFFFFF; --mdc-theme-on-surface:rgba(0, 0, 0, 0.87); --mdc-theme-text-primary-on-background:rgba(0, 0, 0, 0.87); --mdc-theme-text-secondary-on-background:rgba(0, 0, 0, 0.54); --mdc-theme-text-hint-on-background:rgba(0, 0, 0, 0.38); --mdc-theme-text-disabled-on-background:rgba(0, 0, 0, 0.38); --mdc-theme-text-icon-on-background:rgba(0, 0, 0, 0.38); --mdc-theme-primary:#20BEFF; --mdc-theme-error:#D93025; --mdc-theme-background:#F8F8F8; --mdc-theme-surface:#FFFFFF; --mdc-theme-primary-bg:#20BEFF; --mdc-theme-secondary-bg:#919294;"><div id="rmwcPortal"><div class="mdc-menu sc-eYhfvQ kvIdWt sc-gglKJF lkFvRk mdc-menu-surface mdc-menu-surface--is-open-below" aria-hidden="true" style="transform-origin: left top; left: 0px; top: 0px; max-height: 680px;"><ul role="menu" class="mdc-list mdc-menu__items mdc-list"><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">code</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">New Notebook</p></div></li><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">table_chart</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">New Dataset</p></div></li><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">emoji_events</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">New Competition</p></div></li></ul></div><div class="sc-hHmAnv ifuFPk sc-dpIhhG dfwUqB mdc-menu-surface"><div role="document"><div class="sc-ldHvGp iRdxGL"><div tabindex="0" class="sc-iTHlsd dcUoBq"><h5 class="sc-brKeYL sc-ktEKTO izsmej JpJng">No Active Events</h5><br><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">Create notebooks and keep track of their status here.</p><br><div class="sc-bcQaQY dxSwky"><a href="https://www.kaggle.com/code/welcome" target="_blank" tabindex="0" class="sc-kiLEMZ kA-dwyI"><button class="sc-hVkBjg gKVnlg" tabindex="-1" role="button"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq dMgzfR" color="#FFFFFF" sizevalue="18px">add</i><span class="sc-gjTGSA sc-eACynP jTTdyU ctdVmt">New Notebook</span></button></a></div></div><ul role="list" class="km-list"><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kqhUsj ddkBIC"><a class="sc-fYzRkI Rhwmm"><div class="sc-dXoxLi UNcL"><div class="sc-jFJHMl diTA-Dq"><div class="sc-bOSxlg dJhTGr"><div class="sc-jUNCqA dfsyZT"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-eCXjEt vNVtX" emphasis="high" sizevalue="24px">auto_awesome_motion</i><div class="sc-buXUZC cuhEdC">0</div></div></div></div><div class="sc-beqWaB sc-fGFwAa sc-eGFuAX ibASuG bWniQC gobLYp"><p class="sc-dKfzgJ sc-hIqOWS jQQULV dclpAt">0 Active Events</p></div></div></a><div class="sc-GJyyB yIbpw"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh" emphasis="high" sizevalue="24px" role="button" tabindex="0">expand_more</i></div></div></li></ul></div></div></div><div class="mdc-menu sc-eYhfvQ jYGqZs sc-fUKkyk gZAQiF mdc-menu-surface" aria-hidden="true"><ul role="menu" class="mdc-list mdc-menu__items mdc-list"><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">call_split</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">Copy &amp; edit notebook</p></div></li><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">history</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">View versions</p></div></li><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">content_paste</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">Copy API command</p></div></li><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">open_in_new</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">Open in Google Notebooks</p></div></li><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">notifications</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">Follow comments</p></div></li><div class="sc-fyZgVY izHGGo"></div><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">file_download</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">Download code</p></div></li><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">bookmark_border</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">Bookmark</p></div></li><li tabindex="0" role="menuitem" class="mdc-ripple-upgraded sc-cwVcKo hXTmGm mdc-list-item"><div class="mdc-list-item__ripple mdc-ripple-upgraded"></div><div class="sc-gKcDQK gpCHi"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-dlyeST iJiIrv" sizevalue="24px">code</i><p class="sc-dKfzgJ sc-hIqOWS eZHHZG dclpAt">Embed notebook</p></div></li></ul></div></div><div id="kaggle-portal-root-global"></div><div class="sc-fhzAra sc-eDuEge ctHRWJ gENpfd"><div class="sc-itajox cecngT"><div class="sc-krLOvW dTEcMq"><div class="sc-gZsBWS glizLz"><button aria-label="menu" class="sc-jhSXcr jwYiOI undefined google-material-icons">menu</button></div><a href="https://www.kaggle.com/code/ravivarmaodugu/salary-classification-eda-modeling/notebook#site-content" class="sc-kGCsyv goaTcU">Skip to<br>content</a><div class="sc-bHCjkL ezMIqI"><a href="https://www.kaggle.com/"><img src="./Salary Classification _EDA _Modeling _ Kaggle_files/site-logo.svg" alt="Kaggle" class="sc-cWvMYY fcHbOe"></a></div></div></div><div class="sc-eACIdI gJknDw"><div class="mdc-menu-surface--anchor"><button data-menutarget="true" class="sc-lfeRdP gQRFQR"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;"><path fill-rule="evenodd" clip-rule="evenodd" d="M20 30L20 16L16 20L16 30L20 30Z" fill="#20BEFF"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M20 20L30 20L30 16L20 16L20 20Z" fill="#20BEFF"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M16 20L20 16L15.937 16L6 16L6 20L16 20Z" fill="#20BEFF"></path><rect x="20" y="16" width="4" height="10" transform="rotate(-180 20 16)" fill="#20BEFF"></rect></svg><span class="sc-fLQRDB sc-bALXmG sc-iGtWQ kPbSkA JDLpp hluegW">Create</span></button><div></div></div></div><div class="sc-kA-DFXn cKYVFx"><div class="sc-gIgeMy crCVEz"><div class="sc-kHYSFp bvExdT"><div class="sc-bBqzUu glfHWj"><div class="sc-CxMgy cARZDK"><div class="sc-itboUC PLUra"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq fgMqdS sc-hELUyY cCHSsz" emphasis="low" sizevalue="24px">search</i><input placeholder="Search" aria-label="Search" class="sc-dbkWiv eSElWK" value=""></div></div></div><ul role="list" class="km-list"><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kKQOHL cSyRHL"><a class="sc-fYzRkI Rhwmm" href="https://www.kaggle.com/"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq fgMqdS sc-cjBrAI jhLfha" emphasis="low" sizevalue="24px">explore</i><p class="sc-blLsxD sc-ieZDjg iAnQGa gEakdT" style="padding-left: 20px;">Home</p></a></div></li><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kKQOHL cSyRHL"><a class="sc-fYzRkI Rhwmm" href="https://www.kaggle.com/competitions"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq fgMqdS sc-cjBrAI jhLfha" emphasis="low" sizevalue="24px">emoji_events</i><p class="sc-blLsxD sc-ieZDjg iAnQGa gEakdT" style="padding-left: 20px;">Competitions</p></a></div></li><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kKQOHL cSyRHL"><a class="sc-fYzRkI Rhwmm" href="https://www.kaggle.com/datasets"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq fgMqdS sc-cjBrAI jhLfha" emphasis="low" sizevalue="24px">table_chart</i><p class="sc-blLsxD sc-ieZDjg iAnQGa gEakdT" style="padding-left: 20px;">Datasets</p></a></div></li><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kKQOHL cSyRHL"><a class="sc-fYzRkI Rhwmm" href="https://www.kaggle.com/models"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq fgMqdS sc-cjBrAI jhLfha" emphasis="low" sizevalue="24px">tenancy</i><p class="sc-blLsxD sc-ieZDjg iAnQGa gEakdT" style="padding-left: 20px;">Models</p></a></div></li><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr hAlcof sc-kKQOHL cSyRHL"><a class="sc-fYzRkI Rhwmm" href="https://www.kaggle.com/code"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-cjBrAI jhLfha" emphasis="high" sizevalue="24px">code</i><p class="sc-blLsxD sc-ieZDjg dIAfvR gEakdT" style="padding-left: 20px;">Code</p><div class="sc-cmtnDe cButkV"></div></a></div></li><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kKQOHL cSyRHL"><a class="sc-fYzRkI Rhwmm" href="https://www.kaggle.com/discussion"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq fgMqdS sc-cjBrAI jhLfha" emphasis="low" sizevalue="24px">comment</i><p class="sc-blLsxD sc-ieZDjg iAnQGa gEakdT" style="padding-left: 20px;">Discussions</p></a></div></li><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kKQOHL cSyRHL"><a class="sc-fYzRkI Rhwmm" href="https://www.kaggle.com/learn"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq fgMqdS sc-cjBrAI jhLfha" emphasis="low" sizevalue="24px">school</i><p class="sc-blLsxD sc-ieZDjg iAnQGa gEakdT" style="padding-left: 20px;">Learn</p></a></div></li><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kKQOHL cSyRHL"><a class="sc-fYzRkI Rhwmm" href="https://www.kaggle.com/code/ravivarmaodugu/salary-classification-eda-modeling/notebook#"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq fgMqdS sc-cjBrAI jhLfha" emphasis="low" sizevalue="24px">expand_more</i><p class="sc-blLsxD sc-ieZDjg iAnQGa gEakdT" style="padding-left: 20px;">More</p></a></div></li></ul></div></div><div class="sc-eKNumk bMsPJn"><div class="mdc-menu-surface--anchor"><div></div><button class="sc-czqJRe iqaJzh"><div class="sc-jUNCqA dfsyZT"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh sc-eCXjEt vNVtX" emphasis="high" sizevalue="24px">auto_awesome_motion</i><div class="sc-buXUZC cuhEdC">0</div></div><p class="sc-blLsxD sc-ieZDjg sc-gvMyMG iAnQGa gEakdT gsjeXu">View Active Events</p></button></div></div></div></div><div class="sc-lgQHWK jtbxSA"><div class="sc-cwhxAJ RMoBE"><div class="sc-krLOvW dTEcMq"><div class="sc-gZsBWS glizLz"><button aria-label="menu" class="sc-jhSXcr jwYiOI undefined google-material-icons">menu</button></div><a href="https://www.kaggle.com/code/ravivarmaodugu/salary-classification-eda-modeling/notebook#site-content" class="sc-kGCsyv goaTcU">Skip to<br>content</a><div class="sc-bHCjkL ezMIqI"><a href="https://www.kaggle.com/"><img src="./Salary Classification _EDA _Modeling _ Kaggle_files/site-logo.svg" alt="Kaggle" class="sc-cWvMYY fcHbOe"></a></div></div></div><div class="sc-dveHSx bPKajD"><div class="sc-gTJgQo lgcDOu"><div class="sc-CxMgy cARZDK"><div class="sc-itboUC PLUra"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq fgMqdS sc-hELUyY cCHSsz" emphasis="low" sizevalue="24px">search</i><input placeholder="Search" aria-label="Search" class="sc-dbkWiv eSElWK" value=""></div></div></div><div class="sc-hImiYT hsBfEn"><div class="sc-eyugYr fCsSSi"><div class="sc-ejDCVS kZBUIp"><a href="https://www.kaggle.com/account/login?phase=startSignInTab&amp;returnUrl=%2Fcode%2Fravivarmaodugu%2Fsalary-classification-eda-modeling" class="sc-dlmrbx kWzHDF"><button class="sc-hVkBjg bGxwLQ" tabindex="0" role="button"><span class="sc-gjTGSA sc-eACynP jTTdyU ctdVmt">Sign In</span></button></a></div><div class="sc-ejDCVS kZBUIp"><a href="https://www.kaggle.com/account/login?phase=startRegisterTab&amp;returnUrl=%2Fcode%2Fravivarmaodugu%2Fsalary-classification-eda-modeling" class="sc-dlmrbx kWzHDF"><button class="sc-hVkBjg hLHXAF" tabindex="0" role="button"><span class="sc-gjTGSA sc-eACynP jTTdyU ctdVmt">Register</span></button></a></div></div></div></div></div><div data-testid="searchContainer" class="sc-fqxQyE iPKamT"><div></div><div class="sc-cgHjqT flwsqw"><div></div></div></div><div id="site-content" class="sc-hnhRqi ejfsqX"><div class="sc-dZKGDA iDeOTm"></div><div data-testid="notebook-detail-render-tid" class="sc-dQelHR iMCzUG"><div class="sc-bCDidY jeFjsx"><div height="1px" class="sc-joTjNa eTYRHx"></div><div class="sc-klqetb ezlEvv"><div class="sc-cUwiMJ beQfBP"><a href="https://www.kaggle.com/ravivarmaodugu" class="sc-bjMMwb iKhqqj" aria-label="Ravi Varma Odugu"><div data-testid="avatar-image" title="Ravi Varma Odugu" class="sc-eIrltS cAwXfr" style="background-image: url(&quot;https://storage.googleapis.com/kaggle-avatars/thumbnails/7944721-kg.jpg&quot;);"></div><svg width="32" height="32" viewBox="0 0 32 32"><circle r="15" cx="16" cy="16" fill="none" stroke-width="2" style="stroke: rgb(241, 243, 244);"></circle><path d="M 7.183221215612905 28.135254915624213 A 15 15 0 1 0 16 1" fill="none" stroke-width="2" style="stroke: rgb(101, 31, 255);"></path></svg></a><span style="flex: 1 1 0%; margin-left: 16px;"><span class="sc-hhGHuG sc-gXSCqU iIhleq fyPHTK">Ravi Varma Odugu </span><span class="sc-hhGHuG sc-gXSCqU iIhleq fyPHTK"> · <span class="sc-kmVNvq oHkDt" title="Wed Apr 19 2023 19:22:18 GMT+0200 (Central European Summer Time)" aria-label="3 hours ago">3h ago</span> · 82 views</span></span><div class="sc-cA-dUUx gUbHB"><div class="sc-kVqeJY kZyTCu"><div class="sc-fa-dsss ifNGQE"><button mode="default" data-testid="upvotebutton__upvote" aria-label="Upvote" class="sc-hCxPwq sc-dLnvEp izNRGO gZRoTC"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh" sizevalue="24px">arrow_drop_up</i></button><button mode="default" aria-label="12 votes" class="sc-hCxPwq sc-lilDSw izNRGO bhJYLe">12</button></div></div><div class="sc-ffTCds jnuhPs sc-duuoTe dvqueG"><a href="https://www.kaggle.com/kernels/fork-version/126438980" tabindex="0" class="sc-kiLEMZ kA-dwyI"><button class="sc-hVkBjg hLHXAF" tabindex="-1" role="button"><span class="sc-gjTGSA sc-eACynP jTTdyU ctdVmt">Copy &amp; Edit</span></button></a></div><img role="presentation" src="./Salary Classification _EDA _Modeling _ Kaggle_files/bronzel@1x.png" alt="bronze medal" class="sc-iOTKhF hsIcNO"><div><button aria-label="more_vert" class="sc-jhSXcr jwYiOI undefined google-material-icons">more_vert</button><div class="mdc-menu-surface--anchor"><div></div></div></div></div></div><div wrap="hide" class="sc-hyBYnz IFusB sc-eAtLkG cuftvQ"><div class="sc-gewhjU eCVEEZ"><h1 class="sc-iAEyYk sc-fsQiph sc-haTbPV bhyXVy feJEwm kFxGra">Salary Classification |EDA |Modeling</h1><span class="sc-fLQRDB sc-bALXmG sc-pTqjN kPbSkA JDLpp kwwOnY" style="margin-bottom: 0px; max-width: 894px;">Python · <a href="https://www.kaggle.com/datasets/ayessa/salary-prediction-classification" class="sc-jegxcv sc-cbelXg kUdbaN kYfCVP">Salary Prediction Classification</a></span></div><div wrap="hide" class="sc-cSnNnL xfkWS"></div></div></div><div height="1px" class="sc-joTjNa eTYRHx"></div><div class="sc-bXZogI DDIAF"><div class="sc-klqetb ezlEvv"><div class="sc-fwQFQH cHRttf"><h2 class="sc-csCMJt sc-fbJfA sc-ighzGM gttkKI hmVOek eEPxue">Salary Classification |EDA |Modeling</h2><div class="sc-jcEumN gcTIiG"><div class="sc-kUmlZZ eGeJLv sc-crEIGF cnHEcV" role="tablist"><button role="tab" aria-selected="true" class="sc-hbOKPk huALNW"><div class="sc-jEjhTi jFYvMJ"><span class="sc-fLQRDB sc-bALXmG fXSTfP JDLpp">Notebook</span><span class="sc-chkZFb eeUbxW"></span></div></button><button role="tab" aria-selected="false" class="sc-hbOKPk huALNW"><div class="sc-jEjhTi jFYvMJ"><span class="sc-fLQRDB sc-bALXmG kPbSkA JDLpp">Input</span></div></button><button role="tab" aria-selected="false" class="sc-hbOKPk huALNW"><div class="sc-jEjhTi jFYvMJ"><span class="sc-fLQRDB sc-bALXmG kPbSkA JDLpp">Output</span></div></button><button role="tab" aria-selected="false" class="sc-hbOKPk huALNW"><div class="sc-jEjhTi jFYvMJ"><span class="sc-fLQRDB sc-bALXmG kPbSkA JDLpp">Logs</span></div></button><button role="tab" aria-selected="false" class="sc-hbOKPk huALNW"><div class="sc-jEjhTi jFYvMJ"><span class="sc-fLQRDB sc-bALXmG kPbSkA JDLpp">Comments (10)</span></div></button></div></div></div></div><div class="sc-hNeXkk gonWqF sc-cYRmzm fVpOmP sc-hIVHpd NDPSo"></div></div><div class="sc-eYLQmA hljYIW"><div width="758.90625" class="sc-jBeTfA bUmyXy"><div class="sc-FsWDG eyPyxO"><div><div class="sc-beqWaB sc-fGFwAa sc-icwNfp ibASuG bWniQC eRZiWI">Run</div><p class="sc-dKfzgJ sc-hIqOWS sc-gUiLQO eZHHZG dclpAt gVUuZO">149.6s</p></div><button class="sc-hVkBjg jeVuYq" tabindex="0" role="button"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmDBS" color="#202124" sizevalue="18px">history</i><span class="sc-gjTGSA sc-eACynP jTTdyU ctdVmt">Version 6 of 6</span></button></div></div><div width="758.90625" class="sc-hNeXkk gonWqF sc-ldDpjL ilifiK"></div><div class="sc-cKCqqO dNiGzS"></div><div class="sc-iiTNvy lktUKK"><div class="sc-lddneT jdvqFA sc-cnXzld bbqnLw"><aside class="sc-jTsRVL eDGKZT sc-iIMizt hziQxN mdc-drawer--open mdc-drawer--animate mdc-drawer--opening mdc-drawer mdc-drawer--dismissible"><div style="height: 100%;"><div class="sc-gAKklT gWsxyf mdc-drawer__header"><div tabindex="0" class="sc-beqWaB sc-fGFwAa ibASuG bWniQC" style="flex-grow: 1;">Table of Contents</div><button aria-label="Close Table of Contents" title="Close Table of Contents" class="sc-jhSXcr ffoWKs undefined google-material-icons">chevron_right</button></div><div class="sc-ftWlEF hiRyHt sc-ggQGhE ezIyab mdc-drawer__content"><div role="tablist" class="sc-pLjGw crsJKT"><div role="tab" class="sc-eMFuDg rWLWY sc-jbafQZ dnatQA"><div class="sc-cyvUHu dfCxbl"></div><div class="sc-kRwTAr eZSrwO"></div><a tabindex="0" class="sc-dGAKCy koARzy">Loading the Libraries, and the Dataset, &amp; Preprocessing it¶</a></div></div></div></div></aside></div><div class="sc-isFOCr iIoseu"><div style="display: block;"><div class="sc-tYkUx evlASb sc-eEXdPa dCbtrg"><div class="sc-gzbqrr htbuXN"><iframe id="rendered-kernel-content" src="./Salary Classification _EDA _Modeling _ Kaggle_files/__resultx__.html" scrolling="no" title="Main Notebook Content" class="sc-bRdfmS quMip" style="height: 32815px; display: block;"></iframe><div class="sc-iKGQlr jkuTFG" style="display: none;"><div aria-valuemin="0" aria-valuemax="1" class="rmwc-circular-progress rmwc-circular-progress--indeterminate"><svg class="rmwc-circular-progress__circle" viewBox="0 0 24 24"><circle class="rmwc-circular-progress__path" cx="12" cy="12" r="10"></circle></svg></div></div></div></div></div></div></div><div class="sc-cKCqqO dNiGzS"><div class="sc-hNeXkk gonWqF"></div><div class="sc-glTGju dFsBfb"><h5 class="sc-brKeYL sc-ktEKTO izsmej JpJng">License</h5><p class="sc-dnwKUv sc-kgKVFY sc-dpyVDv fdZvRB cBsaPK eIZPdc">This Notebook has been released under the <a href="http://www.apache.org/licenses/LICENSE-2.0" class="sc-jegxcv sc-cbelXg kUdbaN kYfCVP">Apache 2.0</a> open source license.</p></div><div class="sc-glTGju sc-bkiVpU dFsBfb hDgdeo"><h2 class="sc-csCMJt sc-fbJfA gttkKI hmVOek">Continue exploring</h2><ul role="list" class="km-list sc-jDjUiR kTolxO"><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kOmJcu goFJYK"><a class="sc-fYzRkI Rhwmm"><div class="sc-dXoxLi UNcL"><div class="sc-jFJHMl diTA-Dq"><div class="sc-bOSxlg dJhTGr"><img src="./Salary Classification _EDA _Modeling _ Kaggle_files/data.svg" width="48" height="48" alt="Data icon"></div></div><div class="sc-jYvNne daWhij"><div class="sc-beqWaB sc-fGFwAa sc-eGFuAX ibASuG bWniQC gobLYp">Data</div><span class="sc-lnAgIa sc-iKGpAt sc-llcuoN bqETvQ kKrujI jOweiF">1 input and 0 output</span></div></div></a><div class="sc-GJyyB iEqSkA"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh" sizevalue="24px">arrow_right_alt</i></div></div><div class="sc-hNeXkk gonWqF"></div></li><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kOmJcu goFJYK"><a class="sc-fYzRkI Rhwmm"><div class="sc-dXoxLi UNcL"><div class="sc-jFJHMl diTA-Dq"><div class="sc-bOSxlg dJhTGr"><img src="./Salary Classification _EDA _Modeling _ Kaggle_files/logs.svg" width="48" height="48" alt="Logs icon"></div></div><div class="sc-jYvNne daWhij"><div class="sc-beqWaB sc-fGFwAa sc-eGFuAX ibASuG bWniQC gobLYp">Logs</div><span class="sc-lnAgIa sc-iKGpAt sc-llcuoN bqETvQ kKrujI jOweiF">149.6 second run - successful</span></div></div></a><div class="sc-GJyyB iEqSkA"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh" sizevalue="24px">arrow_right_alt</i></div></div><div class="sc-hNeXkk gonWqF"></div></li><li role="listitem" class="sc-kZCGdI gJJUxX"><div class="sc-yJYNr iukvEd sc-kOmJcu goFJYK"><a class="sc-fYzRkI Rhwmm"><div class="sc-dXoxLi UNcL"><div class="sc-jFJHMl diTA-Dq"><div class="sc-bOSxlg dJhTGr"><img src="./Salary Classification _EDA _Modeling _ Kaggle_files/comments.svg" width="48" height="48" alt="Comments icon"></div></div><div class="sc-jYvNne daWhij"><div class="sc-beqWaB sc-fGFwAa sc-eGFuAX ibASuG bWniQC gobLYp">Comments</div><span class="sc-lnAgIa sc-iKGpAt sc-llcuoN bqETvQ kKrujI jOweiF">10 comments</span></div></div></a><div class="sc-GJyyB iEqSkA"><i class="rmwc-icon rmwc-icon--ligature google-material-icons sc-BKAtq gPmyKh" sizevalue="24px">arrow_right_alt</i></div></div></li></ul></div></div><div class="sc-iVFRtF kxTLuw mdc-dialog"><div class="mdc-dialog__container"><div class="mdc-dialog__surface" role="alertdialog" aria-modal="true"></div></div><div class="mdc-dialog__scrim"></div></div><div class="sc-iVFRtF cjTqLn mdc-dialog"><div class="mdc-dialog__container"><div class="mdc-dialog__surface" role="alertdialog" aria-modal="true"></div></div><div class="mdc-dialog__scrim" style="pointer-events: none;"></div></div><div class="sc-iVFRtF cjTqLn sc-fTUBLH bZbSiw mdc-dialog"><div class="mdc-dialog__container"><div class="mdc-dialog__surface" role="alertdialog" aria-modal="true"></div></div><div class="mdc-dialog__scrim"></div></div><div class="sc-iVFRtF cjTqLn mdc-dialog"><div class="mdc-dialog__container"><div class="mdc-dialog__surface" role="alertdialog" aria-modal="true"></div></div><div class="mdc-dialog__scrim"></div></div></div></div></div></div><div class="sc-dxroEu fpmIDB mdc-snackbar mdc-snackbar--leading" aria-live="assertive" aria-atomic="true" aria-hidden="true"><div class="mdc-snackbar__surface"><div role="status" aria-live="polite" class="mdc-snackbar__label"><div style="display: none;"></div></div><div class="mdc-snackbar__actions"></div></div></div><div style="position: relative; z-index: 1000;"><div class="sc-kNZDZS izSFys"><div class="sc-iVFRtF lhKakl mdc-dialog"><div class="mdc-dialog__container"><div class="mdc-dialog__surface" role="alertdialog" aria-modal="true"></div></div><div class="mdc-dialog__scrim"></div></div></div></div></div></div>
+
+<div id="site-body" class="hide">
+    
+
+<div data-component-name="Discussion" style="display: flex; flex-direction: column; flex: 1 0 auto;"></div><script class="kaggle-component" nonce="">var Kaggle=window.Kaggle||{};Kaggle.State=Kaggle.State||[];Kaggle.State.push({"currentUser":{},"siteForums":[{"id":15,"imageUrl":"/static/images/discussion/kaggle-header@2x.png","lastPostDate":"2023-04-19T19:54:08.041511Z","lastPostUrl":"/discussions/general/402812","name":"General","subtitle":"Announcements, resources, and interesting discussions","url":"/discussions/general","recentAuthors":[{"displayName":"Random Draw","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/9280694-kg.png","url":"/danbraswell","userName":"danbraswell","tier":"EXPERT","id":9280694},{"displayName":"Paul Johnson","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/9514573-kg.JPG","url":"/paulrjohnson","userName":"paulrjohnson","tier":"CONTRIBUTOR","id":9514573},{"displayName":"Cape","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/2172143-kg.png","url":"/tcapelle","userName":"tcapelle","tier":"CONTRIBUTOR","id":2172143}],"lastPostUser":{"displayName":"Random Draw","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/9280694-kg.png","url":"/danbraswell","userName":"danbraswell","tier":"EXPERT","id":9280694}},{"id":208,"imageUrl":"/static/images/discussion/getting-started-header@2x.png","lastPostDate":"2023-04-19T18:14:01.865313500Z","lastPostUrl":"/discussions/getting-started/402797","name":"Getting Started","subtitle":"The first stop for new Kagglers","url":"/discussions/getting-started","recentAuthors":[{"displayName":"Mario Bustamante","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","url":"/mariobustamante","userName":"mariobustamante","id":10455290},{"displayName":"Blessing chika","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/10827508-kg.jpg","url":"/blessingchika","userName":"blessingchika","id":10827508},{"displayName":"Youssef Hajjia","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","url":"/youssefhajjia","userName":"youssefhajjia","id":13437295}],"lastPostUser":{"displayName":"Mario Bustamante","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","url":"/mariobustamante","userName":"mariobustamante","id":10455290}},{"id":809,"imageUrl":"/static/images/discussion/feedback-header@2x.png","lastPostDate":"2023-04-19T16:55:16.516965600Z","lastPostUrl":"/discussions/product-feedback/402778","name":"Product Feedback","subtitle":"Tell us what you love, hate, and wish for","url":"/discussions/product-feedback","recentAuthors":[{"displayName":"Joe Chapa","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","url":"/joechapa","userName":"joechapa","tier":"CONTRIBUTOR","id":4945949},{"displayName":"Adarsh Rouniyar","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/11024368-kg.jpeg","url":"/adarshrouniyar","userName":"adarshrouniyar","id":11024368},{"displayName":"Jos\u00E9 Castinneira","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/13418118-gr.jpg","url":"/jmcastinheira","userName":"jmcastinheira","tier":"CONTRIBUTOR","id":13418118}],"lastPostUser":{"displayName":"Joe Chapa","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","url":"/joechapa","userName":"joechapa","tier":"CONTRIBUTOR","id":4945949}},{"id":2239,"imageUrl":"/static/images/discussion/qa-header@2x.png","lastPostDate":"2023-04-19T19:07:40.256354200Z","lastPostUrl":"/discussions/questions-and-answers/402806","name":"Questions \u0026 Answers","subtitle":"Technical advice from other data scientists","url":"/discussions/questions-and-answers","recentAuthors":[{"displayName":"Chi Kim","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","url":"/chikim","userName":"chikim","tier":"CONTRIBUTOR","id":3067920},{"displayName":"D Rahulsingh","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/14601120-kg.png","url":"/drahulsingh","userName":"drahulsingh","tier":"CONTRIBUTOR","id":14601120},{"displayName":"Pranay Bomma","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/2935129-kg.jpeg","url":"/pranaii","userName":"pranaii","tier":"EXPERT","id":2935129}],"lastPostUser":{"displayName":"Chi Kim","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","url":"/chikim","userName":"chikim","tier":"CONTRIBUTOR","id":3067920}},{"id":2605300,"imageUrl":"/static/images/discussion/competition-hosting@2x.png","lastPostDate":"2023-04-17T19:54:15.003600200Z","lastPostUrl":"/discussions/competition-hosting/402302","name":"Competition Hosting","subtitle":"Advice and support on running your own competitions","url":"/discussions/competition-hosting","recentAuthors":[{"displayName":"Yiran Huang2022","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","url":"/yiranhuang2022","userName":"yiranhuang2022","id":12773274},{"displayName":"Lucas Morin","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/4037336-kg.jpg","url":"/lucasmorin","userName":"lucasmorin","tier":"GRANDMASTER","id":4037336},{"displayName":"C R Suthikshn Kumar","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/10147343-kg.JPG","url":"/crsuthikshnkumar","userName":"crsuthikshnkumar","tier":"EXPERT","id":10147343}],"lastPostUser":{"displayName":"Yiran Huang2022","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","url":"/yiranhuang2022","userName":"yiranhuang2022","id":12773274}}]});performance && performance.mark && performance.mark("Discussion.componentCouldBootstrap");</script>
+<script nonce="" type="text/x-mathjax-config;executed=true">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+    preferredFont: "TeX",
+    availableFonts: ["STIX", "TeX"],
+    linebreaks: {
+    automatic: true
+    },
+    EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+    inlineMath: [["\\(", "\\)"], ["\\\\(", "\\\\)"]],
+    displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+    processEscapes: true,
+    ignoreClass: "tex2jax_ignore|dno"
+    },
+    TeX: {
+    noUndefined: {
+    attributes: {
+    mathcolor: "red",
+    mathbackground: "#FFEEEE",
+    mathsize: "90%"
+    }
+    }
+    },
+    Macros: {
+    href: "{}"
+    },
+    skipStartupTypeset: true,
+    messageStyle: "none",
+    extensions: ["Safe.js"],
+    });
+</script>
+<script type="text/javascript" nonce="">
+  window.addEventListener("DOMContentLoaded", () => {
+    const head = document.getElementsByTagName("head")[0];
+    const useProdHosts = ["www.kaggle.com", "admin.kaggle.com"];
+    const subdomain = useProdHosts.includes(window.location.hostname) ? "www" : "staging";
+
+    const lib = document.createElement("script");
+    lib.type = "text/javascript";
+    lib.src = `https://${subdomain}.kaggleusercontent.com/static/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML`;
+    head.appendChild(lib);
+  });
+</script>
+
+
+</div>
+
+
+
+
+  </main>
+
+
+
+</body></html>
